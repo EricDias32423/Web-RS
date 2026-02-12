@@ -56,4 +56,9 @@ class OngController extends Controller
             'ongs' => Ong::all()
         ], 200);
     }
+
+    public function view_ong($id_ong){
+        $ong = Ong::find($id_ong);
+        return view('view_ong')->with('id_ong',$ong->id);
+    }
 }

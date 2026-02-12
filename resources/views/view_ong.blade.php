@@ -14,8 +14,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="inicial.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-
-    <title>Cadastro de Ong</title>
+    <script src="visualiza.js"></script>
+    <title>Vizualizador de Ong</title>
     <style>
         body {
             background: linear-gradient(90deg, #4f439bc7, #360a4f);
@@ -61,13 +61,15 @@
 </head>
 
 <body>
+    <meta name="csrf-token" content="{{csrf_token()}}">
+    <input type="text" id="nome" hidden value="{{$id_ong}}">
     <div class="container" id="tent">
         <h1 id="descricao">Cadastre sua Ong Aqui!</h1>
         <div class="row mt-4">
             <div class="col-lg-7 col-md-7 col-sm-12">
                 <label id="descricao" for="">Nome da Ong</label>
                 <br>
-                <input type="text" id="nome">
+                <input type="text" id="nome" >
             </div>
             <div class="col-lg-7 col-md-7 col-sm-12">
                 <label id="descricao" for="">Email</label>

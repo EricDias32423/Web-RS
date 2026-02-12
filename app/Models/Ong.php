@@ -14,3 +14,4 @@ class Ong extends Model
         'descricao',
     ];
 }
+

@@ -14,3 +14,5 @@ Route::get('/test', [OngController::class, 'envia_test']);
 Route::post('/salva_ong', [OngController::class, 'salva_ong']);
 Route::get('/ong/{id}', [OngController::class, 'exibe_ong']);
 Route::get('/ongs', [OngController::class, 'todas_ongs']);
+
+
