@@ -2,8 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visualizar ONG</title>
+    <title>Excluir ONG</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
@@ -27,15 +26,10 @@
         }
 
         .titulo {
-            color: rgb(0, 136, 255);
+            color: red;
         }
 
-        .label {
-            font-weight: bold;
-            color: #360a4f;
-        }
-
-        .valor {
+        .info {
             background-color: bisque;
             padding: 8px;
             border-radius: 10px;
@@ -47,22 +41,41 @@
 
 <div class="container card-custom">
 
-    <h1 class="titulo text-center mb-4">Detalhes da ONG</h1>
+    <h1 class="titulo text-center mb-4">Confirmar Exclusão</h1>
+
+    <p class="text-center">
+        Você realmente deseja excluir esta ONG?
+    </p>
 
     <div class="mb-3">
-        <div class="label">Nome:</div>
-        <div class="valor">{{ $ong->nome }}</div>
+        <strong>Nome:</strong>
+        <div class="info">{{ $ong->nome }}</div>
     </div>
 
     <div class="mb-3">
-        <div class="label">Email:</div>
-        <div class="valor">{{ $ong->email }}</div>
+        <strong>Email:</strong>
+        <div class="info">{{ $ong->email }}</div>
     </div>
 
     <div class="mb-3">
-        <div class="label">Descrição:</div>
-        <div class="valor">{{ $ong->descricao ?? 'Não informada' }}</div>
+        <strong>Descrição:</strong>
+        <div class="info">{{ $ong->descricao ?? 'Não informada' }}</div>
     </div>
+
+    <form action="{{ route('ong.destroy', $ong->id) }}" method="POST">
+        @csrf
+        @method('DELETE')
+
+        <div class="d-flex justify-content-between mt-4">
+            <a href="{{ url()->previous() }}" class="btn btn-secondary">
+                Cancelar
+            </a>
+
+            <button type="submit" class="btn btn-danger">
+                Excluir ONG
+            </button>
+        </div>
+    </form>
 
 </div>
 

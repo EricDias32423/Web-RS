@@ -11,8 +11,9 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 Route::get('/test', [OngController::class, 'envia_test']);
 
 // ONG
-Route::post('/salva_ong', [OngController::class, 'salva_ong']);
-Route::get('/ong/{id}', [OngController::class, 'exibe_ong']);
 Route::get('/ongs', [OngController::class, 'todas_ongs']);
-
+Route::get('/ongs/{id}', [OngController::class, 'exibe_ong']);
+Route::post('/ongs', [OngController::class, 'salva_ong']);
+Route::put('/ongs/{id}', [OngController::class, 'atualizar_ong']);
+Route::delete('/ongs/{id}', [OngController::class, 'deletar_ong']);
 

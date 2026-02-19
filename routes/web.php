@@ -7,10 +7,20 @@ Route::get('/', function () {
     return ['Laravel' => app()->version()];
 });
 
+/*
+|--------------------------------------------------------------------------
+| ------------------------  VIEWS (BLADE)  --------------------------------
+|--------------------------------------------------------------------------
+*/
 
+Route::get('/ongs', [OngController::class, 'index'])->name('lista_ongs');
 
-Route::view('/cadastrar_ong', 'cadastro_ong');
-Route::get('/view_ong/{id_ong}', [OngController::class, 'view_ong']);
+Route::get('/ongs/create', [OngController::class, 'create_view']);
+Route::get('/ongs/{id}', [OngController::class, 'view_ong']);
+Route::get('/ongs/{id}/edit', [OngController::class, 'alt']);
+Route::get('/ongs/{id}/delete', [OngController::class, 'delete_view']);
 
+Route::delete('/ongs/{id}', [OngController::class, 'destroy'])
+    ->name('ong.destroy');
 
 require __DIR__.'/auth.php';
