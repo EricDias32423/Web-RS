@@ -24,3 +24,7 @@ Route::delete('/ongs/{id}', [OngController::class, 'destroy'])
     ->name('ong.destroy');
 
 require __DIR__.'/auth.php';
+
+Route::view('/Cadastrar', 'cadastrar_ong');
+Route::view('/perfil', 'perfil_user');
+Route::view('/texte', 'texte');
