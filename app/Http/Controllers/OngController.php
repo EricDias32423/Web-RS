@@ -62,11 +62,10 @@ class OngController extends Controller
             'descricao'
         ]));
 
-        return response()->json([
-            'msg' => 'ONG cadastrada com sucesso',
-            'ong' => $ong
-        ], 201);
-    }
+        return redirect()
+        ->route('lista_ongs')
+        ->with('sucesso', 'ong cadastrada');
+            }
 
     // ATUALIZAR
     public function atualizar_ong(Request $request, $id)

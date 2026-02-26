@@ -6,34 +6,39 @@
     <title>Lista de ONGs</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
         body {
-            background: linear-gradient(90deg, #4f439bc7, #360a4f);
-            margin: 0;
-            padding: 40px 0;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
             font-family: 'Poppins', sans-serif;
+            padding: 60px 0;
         }
 
         .card-custom {
-            background-color: azure;
-            border-radius: 30px;
-            padding: 30px;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
         }
 
         .titulo {
-            color: rgb(0, 136, 255);
+            font-weight: 600;
+            color: #4f46e5;
+        }
+
+        .btn-rounded {
+            border-radius: 30px;
         }
 
         .table thead {
-            background-color: #360a4f;
+            background-color: #4f46e5;
             color: white;
         }
 
-        .btn-custom {
-            border-radius: 15px;
-            padding: 5px 15px;
+        .table-hover tbody tr:hover {
+            background-color: #f3f4f6;
         }
     </style>
 </head>
@@ -41,12 +46,18 @@
 <body>
 
 <div class="container">
-
     <div class="card-custom">
 
-        <h1 class="titulo text-center mb-4">Lista de ONGs</h1>
+        {{-- Header com botão --}}
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="titulo m-0">Lista de ONGs</h2>
 
-        {{-- Mensagem de sucesso após delete --}}
+            <a href="/ongs/create" class="btn btn-success btn-rounded">
+                <i class="bi bi-plus-circle"></i> Nova ONG
+            </a>
+        </div>
+
+        {{-- Mensagem de sucesso --}}
         @if(session('sucesso'))
             <div class="alert alert-success text-center">
                 {{ session('sucesso') }}
@@ -59,62 +70,59 @@
             </div>
         @else
 
-        <table class="table table-bordered table-hover text-center align-middle">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Email</th>
-                    <th>Descrição</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($ongs as $ong)
-                <tr>
-                    <td>{{ $ong->id }}</td>
-                    <td>{{ $ong->nome }}</td>
-                    <td>{{ $ong->email }}</td>
-                    <td>{{ $ong->descricao ?? 'Não informada' }}</td>
-                    <td>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle text-center">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Descrição</th>
+                        <th width="220">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($ongs as $ong)
+                    <tr>
+                        <td>{{ $ong->id }}</td>
+                        <td class="fw-semibold">{{ $ong->nome }}</td>
+                        <td>{{ $ong->email }}</td>
+                        <td>{{ $ong->descricao ?? 'Não informada' }}</td>
+                        <td>
 
-                        {{-- VER --}}
-                        <a href="/ongs/{{ $ong->id }}"
-                           class="btn btn-info btn-sm btn-custom">
-                            Ver
-                        </a>
+                            <a href="/ongs/{{ $ong->id }}"
+                               class="btn btn-info btn-sm btn-rounded">
+                                <i class="bi bi-eye"></i>
+                            </a>
 
-                        {{-- ALTERAR --}}
-                        <a href="/ongs/{{ $ong->id }}/edit"
-                           class="btn btn-primary btn-sm btn-custom">
-                            Alterar
-                        </a>
+                            <a href="/ongs/{{ $ong->id }}/edit"
+                               class="btn btn-primary btn-sm btn-rounded">
+                                <i class="bi bi-pencil"></i>
+                            </a>
 
-                        {{-- EXCLUIR --}}
-                        <form action="{{ route('ong.destroy', $ong->id) }}"
-                              method="POST"
-                              style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit"
-                                    class="btn btn-danger btn-sm btn-custom"
-                                    onclick="return confirm('Tem certeza que deseja excluir?')">
-                                Excluir
-                            </button>
-                        </form>
+                            <form action="{{ route('ong.destroy', $ong->id) }}"
+                                  method="POST"
+                                  style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                        class="btn btn-danger btn-sm btn-rounded"
+                                        onclick="return confirm('Tem certeza que deseja excluir?')">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
 
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 
         @endif
 
     </div>
-
 </div>
 
 </body>
 </html>
-

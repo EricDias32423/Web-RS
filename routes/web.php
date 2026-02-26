@@ -16,6 +16,8 @@ Route::get('/', function () {
 Route::get('/ongs', [OngController::class, 'index'])->name('lista_ongs');
 
 Route::get('/ongs/create', [OngController::class, 'create_view']);
+Route::post('/ongs', [OngController::class, 'salva_ong'])->name('ongs.store');
+
 Route::get('/ongs/{id}', [OngController::class, 'view_ong']);
 Route::get('/ongs/{id}/edit', [OngController::class, 'alt']);
 Route::get('/ongs/{id}/delete', [OngController::class, 'delete_view']);
