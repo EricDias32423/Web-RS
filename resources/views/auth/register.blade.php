@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Cadastro - Mãos Solidárias</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -19,7 +21,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
             position: relative;
             overflow: hidden;
         }
@@ -32,7 +34,7 @@
             right: -50%;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
             transform: rotate(-45deg);
             z-index: 0;
         }
@@ -56,21 +58,6 @@
             z-index: 1;
         }
 
-        .register-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 30px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
-            padding: 40px;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .register-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
-        }
-
         .register-header {
             text-align: center;
             margin-bottom: 30px;
@@ -89,6 +76,10 @@
 
         .register-header .logo i {
             font-size: 2.5rem;
+        }
+
+        .register-header .logo .logoimg {
+            height: 150px;
         }
 
         .register-header h1 {
@@ -313,6 +304,7 @@
                 opacity: 0;
                 transform: translateY(-20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -336,13 +328,13 @@
         }
     </style>
 </head>
+
 <body>
     <div class="register-container">
         <div class="register-card">
             <div class="register-header">
                 <div class="logo">
-                    <i>❤️</i>
-                    <span>Mãos<span style="color: #4ECDC4;">Solidárias</span></span>
+                    <img src="logo.png" alt="" class="logoimg">
                 </div>
                 <h1>Faça parte <span>dessa missão</span></h1>
                 <p>Crie sua conta e comece a ajudar quem precisa</p>
@@ -362,19 +354,11 @@
 
                 <!-- Name -->
                 <div class="form-group">
-                    <label for="name">Nome completo</label>
+                    <label for="name"></label>
                     <div class="input-wrapper">
                         <span class="input-icon">👤</span>
-                        <input 
-                            id="name" 
-                            type="text" 
-                            name="name" 
-                            value="{{ old('name') }}" 
-                            required 
-                            autofocus 
-                            autocomplete="name"
-                            placeholder="Seu nome completo"
-                        />
+                        <input id="name" type="text" name="name" value="{{ old('name') }}" required
+                            autofocus autocomplete="name" placeholder="Nome completo" />
                     </div>
                     @error('name')
                         <div class="error-message">
@@ -386,18 +370,10 @@
 
                 <!-- Email Address -->
                 <div class="form-group">
-                    <label for="email">E-mail</label>
                     <div class="input-wrapper">
                         <span class="input-icon">📧</span>
-                        <input 
-                            id="email" 
-                            type="email" 
-                            name="email" 
-                            value="{{ old('email') }}" 
-                            required 
-                            autocomplete="username"
-                            placeholder="seu@email.com"
-                        />
+                        <input id="email" type="email" name="email" value="{{ old('email') }}" required
+                            autocomplete="username" placeholder="Email" />
                     </div>
                     @error('email')
                         <div class="error-message">
@@ -407,36 +383,20 @@
                     @enderror
                 </div>
 
+                <!-- Telefone -->
+                <div class="form-group">
+                    <div class="input-wrapper">
+                        <span class="input-icon">📞</span>
+                        <input id="telefone" name="telefone" autocomplete="username" placeholder="(00)000000000" />
+                    </div>
+                </div>
+
                 <!-- Password -->
                 <div class="form-group">
-                    <label for="password">Senha</label>
                     <div class="input-wrapper">
                         <span class="input-icon">🔒</span>
-                        <input 
-                            id="password" 
-                            type="password"
-                            name="password" 
-                            required 
-                            autocomplete="new-password"
-                            placeholder="Crie uma senha segura"
-                        />
-                    </div>
-                    <div class="password-strength">
-                        <div class="password-strength-bar" id="passwordStrength"></div>
-                    </div>
-                    <div class="password-requirements" id="passwordRequirements">
-                        <div class="requirement" id="req-length">
-                            <i>🔴</i> Mínimo 8 caracteres
-                        </div>
-                        <div class="requirement" id="req-upper">
-                            <i>🔴</i> 1 letra maiúscula
-                        </div>
-                        <div class="requirement" id="req-number">
-                            <i>🔴</i> 1 número
-                        </div>
-                        <div class="requirement" id="req-special">
-                            <i>🔴</i> 1 caractere especial
-                        </div>
+                        <input id="password" type="password" name="password" required autocomplete="new-password"
+                            placeholder="Senha" />
                     </div>
                     @error('password')
                         <div class="error-message">
@@ -448,19 +408,16 @@
 
                 <!-- Confirm Password -->
                 <div class="form-group">
-                    <label for="password_confirmation">Confirmar senha</label>
                     <div class="input-wrapper">
                         <span class="input-icon">🔐</span>
-                        <input 
-                            id="password_confirmation" 
-                            type="password"
-                            name="password_confirmation" 
-                            required 
-                            autocomplete="new-password"
-                            placeholder="Digite a senha novamente"
-                        />
+                        <input id="password_confirmation" type="password" name="password_confirmation" required
+                            autocomplete="new-password" placeholder="Confirme sua Senha" />
                     </div>
                     <div id="passwordMatch" style="font-size:0.8rem; margin-top:5px;"></div>
+
+                    <div class="password-strength">
+                        <div class="password-strength-bar" id="passwordStrength"></div>
+                    </div>
                 </div>
 
                 <button type="submit" class="btn-register" id="submitBtn">
@@ -469,13 +426,13 @@
                 </button>
 
                 <div class="login-link">
-                    Já tem uma conta? 
+                    Já tem uma conta?
                     <a href="{{ route('login') }}">Faça login aqui</a>
                 </div>
 
                 <div class="terms">
-                    Ao se registrar, você concorda com nossos 
-                    <a href="#">Termos de Uso</a> e 
+                    Ao se registrar, você concorda com nossos
+                    <a href="#">Termos de Uso</a> e
                     <a href="#">Política de Privacidade</a>
                 </div>
             </form>
@@ -488,7 +445,7 @@
         const confirmPassword = document.getElementById('password_confirmation');
         const strengthBar = document.getElementById('passwordStrength');
         const submitBtn = document.getElementById('submitBtn');
-        
+
         const reqLength = document.getElementById('req-length');
         const reqUpper = document.getElementById('req-upper');
         const reqNumber = document.getElementById('req-number');
@@ -497,22 +454,22 @@
 
         function checkPasswordStrength() {
             const pass = password.value;
-            
+
             // Verificar requisitos
             const hasLength = pass.length >= 8;
             const hasUpper = /[A-Z]/.test(pass);
             const hasNumber = /[0-9]/.test(pass);
             const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(pass);
-            
+
             // Atualizar indicadores
             updateRequirement(reqLength, hasLength, '✅ Comprimento OK', '🔴 Mínimo 8 caracteres');
             updateRequirement(reqUpper, hasUpper, '✅ Maiúscula OK', '🔴 1 letra maiúscula');
             updateRequirement(reqNumber, hasNumber, '✅ Número OK', '🔴 1 número');
             updateRequirement(reqSpecial, hasSpecial, '✅ Especial OK', '🔴 1 caractere especial');
-            
+
             // Calcular força
             const strength = [hasLength, hasUpper, hasNumber, hasSpecial].filter(Boolean).length;
-            
+
             // Atualizar barra
             strengthBar.className = 'password-strength-bar';
             if (strength <= 1) {
@@ -567,4 +524,5 @@
         }, 5000);
     </script>
 </body>
+
 </html>
